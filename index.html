@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Kawaii Social Network</title>
+</head>
+<body>
+  <header>
+    <h1>Spread Kawaii Happiness!</h1>
+  </header>
+  <main>
+    <section id="post-section">
+      <h2>Post a Cute Image</h2>
+      <input type="text" id="image-url" placeholder="Image URL">
+      <button id="post-button">Post</button>
+    </section>
+    <section id="images-section">
+      <h2>Kawaii Images</h2>
+      <div id="image-list"></div>
+    </section>
+  </main>
+  <script>
+    const postButton = document.getElementById('post-button');
+    const imageList = document.getElementById('image-list');
+
+    postButton.addEventListener('click', () => {
+      const imageUrl = document.getElementById('image-url').value;
+
+      if (imageUrl.trim() !== '') {
+        postImage(imageUrl);
+      }
+    });
+
+    function postImage(imageUrl) {
+      const image = document.createElement('img');
+      image.src = imageUrl;
+      image.alt = 'Kawaii Image';
+
+      imageList.appendChild(image);
+      document.getElementById('image-url').value = '';
+    }
+  </script>
+</body>
+  </html>
+  
