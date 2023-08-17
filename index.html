@@ -23,10 +23,11 @@
   </main>
   <script>
     const postButton = document.getElementById('post-button');
+    const imageInput = document.getElementById('image-url');
     const imageList = document.getElementById('image-list');
 
     postButton.addEventListener('click', () => {
-      const imageUrl = document.getElementById('image-url').value;
+      const imageUrl = imageInput.value;
 
       if (imageUrl.trim() !== '') {
         postImage(imageUrl);
@@ -34,7 +35,7 @@
     });
 
     function postImage(imageUrl) {
-      fetch('/post', {
+      fetch('/.netlify/functions/post', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -44,12 +45,33 @@
       .then(response => response.text())
       .then(message => {
         alert(message);
-        document.getElementById('image-url').value = '';
+        imageInput.value = '';
+        fetchImages(); // Refresh image list after posting
       })
       .catch(error => {
         console.error('Error:', error);
       });
     }
+
+    function fetchImages() {
+      fetch('/.netlify/functions/images')
+      .then(response => response.json())
+      .then(images => {
+        imageList.innerHTML = '';
+        images.forEach(image => {
+          const img = document.createElement('img');
+          img.src = image.imageUrl;
+          img.alt = 'Kawaii Image';
+          imageList.appendChild(img);
+        });
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    }
+
+    fetchImages(); // Fetch images when page loads
   </script>
 </body>
-</html>
+  </html>
+  
