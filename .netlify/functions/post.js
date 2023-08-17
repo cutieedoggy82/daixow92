@@ -4,7 +4,7 @@ const path = require('path');
 exports.handler = async function(event) {
   const { imageUrl } = JSON.parse(event.body);
 
-  const imageDataPath = path.resolve('.netlify/functions/imageData.json');
+  const imageDataPath = path.resolve('/.netlify/functions/imageData.json');
 
   try {
     const imageData = fs.existsSync(imageDataPath)
@@ -27,4 +27,3 @@ exports.handler = async function(event) {
     };
   }
 };
-      
