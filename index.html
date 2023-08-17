@@ -35,7 +35,7 @@
     });
 
     function postImage(imageUrl) {
-      fetch('/.netlify/functions/post', {
+      fetch('https://daixow920.onrender.com/post', ', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -54,7 +54,7 @@
     }
 
     function fetchImages() {
-      fetch('/.netlify/functions/images')
+      fetch('https://daixow920.onrender.com/images')
       .then(response => response.json())
       .then(images => {
         imageList.innerHTML = '';
