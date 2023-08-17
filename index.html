@@ -34,14 +34,22 @@
     });
 
     function postImage(imageUrl) {
-      const image = document.createElement('img');
-      image.src = imageUrl;
-      image.alt = 'Kawaii Image';
-
-      imageList.appendChild(image);
-      document.getElementById('image-url').value = '';
+      fetch('/post', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ imageUrl })
+      })
+      .then(response => response.text())
+      .then(message => {
+        alert(message);
+        document.getElementById('image-url').value = '';
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
     }
   </script>
 </body>
-  </html>
-  
+</html>
